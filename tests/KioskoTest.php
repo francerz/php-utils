@@ -16,4 +16,12 @@ class KioskoTest extends TestCase
         $dig = Kiosko::getDigitoVerificador('1719460807162001002008232150');
         $this->assertEquals('9', $dig);
     }
+
+    public function testEsValido()
+    {
+        $this->assertTrue(Kiosko::esValido('123456789012345678901234560'));
+        $this->assertTrue(Kiosko::esValido('654321098765432109876543215'));
+        $this->assertTrue(Kiosko::esValido('472758927348593829487572041'));
+        $this->assertTrue(Kiosko::esValido('17194608071620010020082321509'));
+    }
 }

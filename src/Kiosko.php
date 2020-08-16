@@ -16,4 +16,12 @@ class Kiosko
         }
         return $sum % 11 % 10;
     }
+
+    public static function esValido(string $str) : bool
+    {
+        $digit = substr($str, -1);
+        $str = substr($str, 0, -1);
+
+        return static::getDigitoVerificador($str) === $digit;
+    }
 }
