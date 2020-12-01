@@ -10,7 +10,7 @@ class CodeIgniter4
     {
         $ci_response->setStatusCode($response->getStatusCode());
 
-        foreach ($response->getHeaders as $name => $values) {
+        foreach ($response->getHeaders() as $name => $values) {
             $ci_response->setHeader($name, $values);
         }
 
