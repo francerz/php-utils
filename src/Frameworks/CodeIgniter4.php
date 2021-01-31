@@ -2,6 +2,8 @@
 
 namespace Francerz\Utils\Frameworks;
 
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class CodeIgniter4
@@ -15,5 +17,7 @@ class CodeIgniter4
         }
 
         $ci_response->setBody((string)$response->getBody());
+
+        return $ci_response;
     }
 }
