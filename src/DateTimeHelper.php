@@ -3,6 +3,8 @@
 namespace Francerz\Utils;
 
 use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -64,6 +66,37 @@ abstract class DateTimeHelper
     public static function addLocalizedLongDateFormat(string $lang, string $format)
     {
         static::$longDateFormats[$lang] = $format;
+    }
+
+    private static function toDateTime($dateTime)
+    {
+        if (is_null($dateTime)) {
+            return null;
+        }
+        if ($dateTime instanceof DateTime) {
+            return $dateTime;
+        }
+        if ($dateTime instanceof DateTimeImmutable) {
+            return DateTime::createFromImmutable($dateTime);
+        }
+        if (is_int($dateTime)) {
+            return new DateTime("@{$dateTime}");
+        }
+        return new DateTime($dateTime);
+    }
+
+    /**
+     * @param DateTimeInterface|string|int $dateTime
+     * @param string $format
+     * @return string|null
+     */
+    public static function format($dateTime, $format)
+    {
+        $dateTime = static::toDateTime($dateTime);
+        if (is_null($dateTime)) {
+            return null;
+        }
+        return $dateTime->format($format);
     }
 }
 
